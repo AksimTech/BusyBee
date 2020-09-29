@@ -1,0 +1,10 @@
+namespace ToDo.API.Entities
+{
+    internal class TodoItem
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public bool IsCompleted { get; set; }
+        public int AccountId { get; set; }
+    }
+}
