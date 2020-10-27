@@ -11,7 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ToDo.API.Contracts;
 using ToDo.API.Entities;
+using ToDo.API.Repository;
 
 namespace ToDo.API
 {
@@ -28,9 +30,13 @@ namespace ToDo.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddEntityFrameworkNpgsql().AddDbContext<RepositoryContext>(
                 opts => opts.UseNpgsql(Configuration.GetConnectionString("ConnectionString"))
             );
+
+            services.AddScoped<IAccountsRepository, AccountsRepository>();
+            services.AddScoped<ITodoItemsRepository, TodoItemsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
